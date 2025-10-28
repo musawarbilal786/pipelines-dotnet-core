@@ -1,0 +1,33 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+# Stage 1: Test
+- stage: Test
+  displayName: 'Run Tests'
+  jobs:
+  - job: RunTests
+    displayName: 'Execute Tests'
+    steps:
+    - script: echo "Running unit tests..."
+      displayName: 'Test Script'
+    - script: |
+        echo "Add commands here to run your actual test framework, e.g., npm test, pytest, etc."
+      displayName: 'Run Test Framework'
+
+# Stage 2: Build
+- stage: Build
+  displayName: 'Build Project'
+  dependsOn: Test
+  jobs:
+  - job: BuildProject
+    displayName: 'Build the Code'
+    steps:
+    - script: echo "Building the project..."
+      displayName: 'Build Script'
+    - script: |
+        echo "Add your actual build commands here, e.g., npm run build, dotnet build, etc."
+      displayName: 'Run Build Commands'
